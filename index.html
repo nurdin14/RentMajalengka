@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Mobil Nirwana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    #bookingForm {
+      transition: all 0.3s ease-in-out;
+      max-width: 100%;
+  }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <h1 class="text-xl sm:text-2xl font-bold text-blue-700">Rental Majalengka</h1>
+      </div>
+      <nav>
+        <ul class="hidden md:flex space-x-6 text-sm font-medium">
+          <li><a href="#beranda" class="text-gray-600 hover:text-blue-600 transition">Beranda</a></li>
+          <li><a href="#mobil" class="text-gray-600 hover:text-blue-600 transition">Mobil</a></li>
+          <li><a href="#testi" class="text-gray-600 hover:text-blue-600 transition">Testimonial</a></li>
+          <li><a href="#kontak" class="text-gray-600 hover:text-blue-600 transition">Kontak</a></li>
+        </ul>
+        <div class="md:hidden">
+          <button id="menuBtn" class="text-gray-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+      <ul class="space-y-2 text-sm font-medium">
+        <li><a href="#beranda" class="block text-gray-700 hover:text-blue-600">Beranda</a></li>
+        <li><a href="#mobil" class="block text-gray-700 hover:text-blue-600">Mobil</a></li>
+        <li><a href="#booking" class="block text-gray-700 hover:text-blue-600">Booking</a></li>
+        <li><a href="#kontak" class="block text-gray-700 hover:text-blue-600">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section id="beranda" class="relative bg-cover bg-center bg-no-repeat py-20 overflow-hidden" style="background-image: url('img/slide1.jpg');">
+
+    <!-- Overlay gelap -->
+    <div class="absolute inset-0 bg-black/60 z-0"></div>
+  
+    <!-- Isi konten -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-20">
+  
+      <!-- Kiri: Teks CTA -->
+      <div class="w-full lg:w-[60%] text-center lg:text-left max-w-4xl">
+        <h1 class="leading-tight mb-4 text-white drop-shadow-lg font-sans">
+          <span class="block font-extrabold">
+            <span class="sm:text-6xl text-4xl bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300 text-transparent bg-clip-text">Temukan</span>
+            <span class="sm:text-4xl text-4xl">kenyamanan</span>
+          </span>
+          <span class="block font-bold mt-1">
+            <span class="text-4xl sm:text-4xl text-white tracking-wide animate-fadeInUp delay-100">Serta</span>
+            <span class="sm:text-6xl bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300 text-transparent bg-clip-text">Keamanan</span>
+          </span>
+          <span class="block text-4xl sm:text-4xl text-gray-300 mt-1 animate-fadeInUp delay-200 mt-1">Perjalanan Anda</span>
+        </h1>
+        <p class="text-white text-base sm:text-lg mb-6 drop-shadow-md">
+          Sewa mobil terbaik bersama Rental Majalengka, siap mengantar Anda ke mana saja dengan harga terjangkau dan pelayanan terbaik!
+        </p>
+        <button id="cek" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-700 transition">
+          Booking Sekarang
+        </button>
+      </div>
+  
+      <!-- Kanan: Form Booking -->
+      <div id="bookingForm" class="hidden w-full lg:w-[480px] lg:ml-auto bg-white bg-opacity-90 p-6 rounded-3xl shadow-lg mt-6 lg:mt-0 transition-all duration-500">
+        <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">Form Booking Cepat</h3>
+        <form class="space-y-3">
+          <input type="text" id="nama" autocomplete="off" placeholder="Nama Lengkap" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="tel" id="no_hp" autocomplete="off" placeholder="No. Telepon" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="email" id="email" autocomplete="off" placeholder="Email" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <select id="type_mobil" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option disabled selected>Pilih Mobil</option>
+            <option>Avanza</option>
+            <option>Innova</option>
+            <option>Hiace</option>
+          </select>
+          <input type="date" id="start" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="date" id="end" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <textarea id="note" placeholder="Catatan Tambahan" class="w-full px-4 py-2 bg-gray-100 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+          <button type="button" id="send" class="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition">
+            Kirim Booking
+          </button>
+        </form>
+      </div>
+  
+    </div>
+  </section>  
+
+  <!-- Fitur / Kenapa Kami -->
+  <section class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center text-white">
+      <h2 class="text-4xl font-extrabold mb-12 tracking-tight">Kenapa Memilih Kami?</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        <!-- Fitur 1 -->
+        <div class="bg-white p-8 rounded-xl shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:rotate-3 hover:bg-blue-50">
+          <div class="flex justify-center mb-6 transition-transform transform hover:scale-110">
+            <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" class="w-24 h-24 text-blue-600 transition-all duration-300 transform hover:scale-125">
+          </div>
+          <h3 class="font-semibold text-2xl text-blue-600 mb-4">Driver Profesional</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Tim kami berpengalaman dan ramah, siap mengantar Anda dengan pelayanan terbaik untuk kenyamanan dan keamanan perjalanan.
+          </p>
+        </div>
+        <!-- Fitur 2 -->
+        <div class="bg-white p-8 rounded-xl shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:rotate-3 hover:bg-blue-50">
+          <div class="flex justify-center mb-6 transition-transform transform hover:scale-110">
+            <img src="https://cdn-icons-png.flaticon.com/512/1048/1048976.png" class="w-24 h-24 text-blue-600 transition-all duration-300 transform hover:scale-125">
+          </div>
+          <h3 class="font-semibold text-2xl text-blue-600 mb-4">Mobil Terawat</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Kendaraan kami selalu terawat dengan perawatan rutin, memastikan Anda merasakan kenyamanan selama perjalanan.
+          </p>
+        </div>
+        <!-- Fitur 3 -->
+        <div class="bg-white p-8 rounded-xl shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl hover:rotate-3 hover:bg-blue-50">
+          <div class="flex justify-center mb-6 transition-transform transform hover:scale-110">
+            <img src="https://cdn-icons-png.flaticon.com/512/1048/1048931.png" class="w-24 h-24 text-blue-600 transition-all duration-300 transform hover:scale-125">
+          </div>
+          <h3 class="font-semibold text-2xl text-blue-600 mb-4">Harga Kompetitif</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Dengan harga yang terjangkau dan layanan premium, kami memberikan Anda pilihan terbaik untuk kebutuhan sewa mobil.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daftar Mobil -->
+  <section id="mobil" class="py-20 bg-gradient-to-r from-blue-50 to-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-center text-3xl sm:text-4xl font-bold text-gray-800 mb-16">Pilih Mobil yang Sesuai dengan Kebutuhan Anda</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Mobil 1 -->
+        <div class="bg-white rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden">
+          <img src="img/avanza.png" class="w-full h-56 object-cover" alt="Toyota Avanza">
+          <div class="p-6 flex flex-col justify-between">
+            <h4 class="font-bold text-xl text-gray-800">Toyota Avanza</h4>
+            <p class="text-blue-600 font-semibold mt-2">Rp350.000 / hari</p>
+            <p class="text-gray-600 mt-3">Mobil yang ideal untuk perjalanan keluarga atau kelompok kecil dengan kenyamanan dan ruang yang luas.</p>
+            <a href="#beranda" class="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-blue-700 transition">Pesan Sekarang</a>
+          </div>
+        </div>
+        <!-- Mobil 2 -->
+        <div class="bg-white rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden">
+          <img src="img/hiace.png" class="w-full h-56 object-cover" alt="Toyota Hiace">
+          <div class="p-6 flex flex-col justify-between">
+            <h4 class="font-bold text-xl text-gray-800">Toyota Hiace</h4>
+            <p class="text-blue-600 font-semibold mt-2">Rp950.000 / hari</p>
+            <p class="text-gray-600 mt-3">Ideal untuk perjalanan grup besar, Hiace menawarkan kenyamanan dan kapasitas penumpang yang luas.</p>
+            <a href="#beranda" class="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-blue-700 transition">Pesan Sekarang</a>
+          </div>
+        </div>
+        <!-- Mobil 3 -->
+        <div class="bg-white rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden">
+          <img src="img/inova.png" class="w-full h-56 object-cover" alt="Toyota Innova">
+          <div class="p-6 flex flex-col justify-between">
+            <h4 class="font-bold text-xl text-gray-800">Toyota Innova</h4>
+            <p class="text-blue-600 font-semibold mt-2">Rp450.000 / hari</p>
+            <p class="text-gray-600 mt-3">Dikenal dengan kenyamanannya, Innova sangat cocok untuk perjalanan jauh dengan kapasitas penumpang lebih banyak.</p>
+            <a href="#beranda" class="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-blue-700 transition">Pesan Sekarang</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Carousel -->
+  <section id="testi" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Apa Kata Mereka</h2>
+      
+      <!-- Swiper -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Rental Majalengka bener-bener terbaik! Mobil bersih dan pelayanan sangat ramah."</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=1" class="w-12 h-12 rounded-full mr-4" alt="Dian">
+              <div>
+                <p class="font-semibold text-gray-800">Dian Puspita</p>
+                <p class="text-sm text-gray-500">Majalengka</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Proses booking gampang banget, respon admin juga cepat. Recommended!"</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=2" class="w-12 h-12 rounded-full mr-4" alt="Rizky">
+              <div>
+                <p class="font-semibold text-gray-800">Rizky Maulana</p>
+                <p class="text-sm text-gray-500">Cirebon</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Sudah langganan tiap liburan. Mobil nyaman, harga juga masuk akal."</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=3" class="w-12 h-12 rounded-full mr-4" alt="Siti">
+              <div>
+                <p class="font-semibold text-gray-800">Siti Rohmah</p>
+                <p class="text-sm text-gray-500">Majalengka</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 1 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Rental Majalengka bener-bener terbaik! Mobil bersih dan pelayanan sangat ramah."</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=1" class="w-12 h-12 rounded-full mr-4" alt="Dian">
+              <div>
+                <p class="font-semibold text-gray-800">Dian Puspita</p>
+                <p class="text-sm text-gray-500">Majalengka</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Proses booking gampang banget, respon admin juga cepat. Recommended!"</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=2" class="w-12 h-12 rounded-full mr-4" alt="Rizky">
+              <div>
+                <p class="font-semibold text-gray-800">Rizky Maulana</p>
+                <p class="text-sm text-gray-500">Cirebon</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <p class="text-gray-600 mb-4">"Sudah langganan tiap liburan. Mobil nyaman, harga juga masuk akal."</p>
+            <div class="flex items-center">
+              <img src="https://i.pravatar.cc/50?img=3" class="w-12 h-12 rounded-full mr-4" alt="Siti">
+              <div>
+                <p class="font-semibold text-gray-800">Siti Rohmah</p>
+                <p class="text-sm text-gray-500">Majalengka</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigasi -->
+        <div class="swiper-pagination mt-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontak -->
+  <section id="kontak" class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Hubungi Kami</h3>
+      
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Kartu Kontak -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
+          <h4 class="text-xl font-semibold text-gray-700 mb-4">Informasi Kontak</h4>
+          
+          <div class="flex items-start space-x-4">
+            <div class="text-blue-600 text-2xl">
+              📱
+            </div>
+            <div>
+              <p class="text-gray-700 font-semibold">WhatsApp</p>
+              <a href="https://wa.me/62xxx" class="text-blue-600 hover:underline">0812-xxxx-xxxx</a>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="text-blue-600 text-2xl">
+              📧
+            </div>
+            <div>
+              <p class="text-gray-700 font-semibold">Email</p>
+              <p>rentalMajalengka@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="text-blue-600 text-2xl">
+              📍
+            </div>
+            <div>
+              <p class="text-gray-700 font-semibold">Alamat</p>
+              <p>Tejamulya, Kec. Argapura, Kabupaten Majalengka, Jawa Barat 45462</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps -->
+        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.779623428679!2d108.3475417745409!3d-6.916930167698029!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f3cbc28a92655%3A0x2bbc3a9a5743c1aa!2sLembah%20Panyaweuyan!5e0!3m2!1sid!2sid!4v1744510507785!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white text-center p-4 text-sm text-gray-500">
+    &copy; 2025 Rental Majalengka. All rights reserved.
+  </footer>
+
+  <script>
+
+    $(document).ready(function(){
+      let isVisible = false;
+      $('#send').click(function(e){
+        e.preventDefault(); // Mencegah form submit bawaan
+
+        // Ambil nilai dari input
+        let nama = $('#nama').val().trim();
+        let nohp = $('#no_hp').val().trim();
+        let email = $('#email').val().trim();
+        let mobil = $('#type_mobil').val();
+        let tanggalPinjam = $('#start').val().trim();
+        let tanggalKembali = $('#end').val().trim();
+        let catatan = $('#note').val().trim() || '-';
+
+        // Validasi input (cek jika ada yang kosong)
+        if (nama === '' || nohp === '' || email === '' || mobil === '' || tanggalPinjam === '' || tanggalKembali === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Semua field wajib diisi!',
+            });
+            return;
+        }
+
+        // Validasi email sederhana
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Format email tidak valid!',
+            });
+            return;
+        }
+
+        // Validasi nomor HP (minimal 10 digit)
+        if (nohp.length < 10) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Nomor handphone tidak valid!',
+            });
+            return;
+        }
+
+
+        // Format pesan WhatsApp
+        const pesan = `*Nama Lengkap* : ${nama}%0A` +
+              `*No. Handphone* : ${nohp}%0A` +
+              `*Email* : ${email}%0A` +
+              `*Mobil* : ${mobil}%0A` +
+              `*Tanggal Pinjam* : ${tanggalPinjam}%0A` +
+              `*Tanggal Kembali* : ${tanggalKembali}%0A` +
+              `*Catatan* : ${catatan}`;
+
+        // Ganti dengan nomor WhatsApp tujuan (format internasional tanpa +)
+        const nomorAdmin = "6285794069635";
+        const url = `https://wa.me/${nomorAdmin}?text=${pesan}`;
+
+        // Konfirmasi sebelum kirim
+        Swal.fire({
+            title: 'Kirim Booking?',
+            text: "Data akan dikirim ke WhatsApp!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, kirim!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open(url, '_blank'); // Kirim ke WA
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Booking Terkirim!',
+                    text: 'Data booking telah dikirim ke WhatsApp.'
+                });
+
+                // Reset form setelah kirim
+                $('#nama').val('');
+                $('#no_hp').val('');
+                $('#email').val('');
+                $('#type_mobil').val('');
+                $('#start').val('');
+                $('#end').val('');
+                $('#note').val('');
+            }
+        });        
+      });
+
+
+      $(document).on('click', '#cek', function () {
+        const $form = $('#bookingForm');
+        const $btn = $('#cek');
+
+        if (!isVisible) {
+          // Show form with animation
+          const animClass = window.innerWidth < 1024 ? 'animate__fadeInUp' : 'animate__fadeInRight';
+          $form.removeClass('hidden animate__fadeOutDown animate__fadeOutRight')
+            .addClass(`animate__animated ${animClass}`)
+            .css('display', 'block');
+
+          // Ganti teks tombol
+          $btn.text('Tutup Form');
+          isVisible = true;
+        } else {
+          // Hide form with animation
+          const animClass = window.innerWidth < 1024 ? 'animate__fadeOutDown' : 'animate__fadeOutRight';
+          $form.removeClass('animate__fadeInUp animate__fadeInRight')
+            .addClass(`animate__animated ${animClass}`);
+
+          setTimeout(() => {
+            $form.addClass('hidden').css('display', 'none');
+          }, 500);
+
+          // Kembalikan teks tombol
+          $btn.text('Booking Sekarang');
+          isVisible = false;
+        }
+      });
+
+    });
+
+    // Menu Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Swiper Initialization
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        }
+      }
+    });
+  </script>
+</body>
+</html>
